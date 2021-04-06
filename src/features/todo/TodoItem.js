@@ -1,23 +1,22 @@
-import { useState } from "react";
 
 import './styles.css';
 
-const TodoItem = ({ todo }) => {
-    const [isDone, setIsDone] = useState(todo.isDone);
-
+const TodoItem = ({ todo, changeStatus }) => {
     const handleChangeCheck = (evt) => {
-        setIsDone(evt.target.checked);
+        changeStatus(todo);
         if (evt.target.checked) {
-            evt.target.nextSibling.classList.add('done');
+            evt.target.parentNode.classList.add('done');
         } else {
-            evt.target.nextSibling.classList.remove('done'); 
+            evt.target.parentNode.classList.remove('done'); 
         }
     }
 
     return (
     <div>
-        <input type="checkbox" checked={isDone} onChange={handleChangeCheck}></input>
-        <label className={isDone ? "done" : ""}>{todo.title}</label>
+        <label className={todo.isDone ? "done" : ""}>
+            <input type="checkbox" checked={todo.isDone} onChange={handleChangeCheck}></input>
+            {todo.title}
+        </label>
     </div>
     )
 }
