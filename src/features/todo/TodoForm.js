@@ -2,12 +2,15 @@ import { useState } from "react";
 
 import './styles.css';
 
-const TodoForm = ({ submitForm, resetTodos }) => {
+const TodoForm = ({ addTodo, resetTodos }) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        submitForm(inputValue);
+        addTodo({
+            'title': inputValue,
+            'isDone': false,
+        });
         setInputValue('');
     }
 
