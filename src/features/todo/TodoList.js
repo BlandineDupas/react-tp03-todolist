@@ -5,14 +5,22 @@ import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 import {
     add,
-    selectTodos
+    selectTodos,
+    reset,
 } from "./todoSlice";
 
 const TodoList = () => {
     const dispatch = useDispatch();
 
     const todos = useSelector(selectTodos);
-    const handleNewTodo = (todo) => dispatch(add(todo));
+    const handleNewTodo = (todo) => {
+        // prevents duplications
+        if (!todos.some(item => item.title === todo.title)) {
+            dispatch(add(todo));
+            return true;
+        }
+        return false;
+    }
 
     return (
         <div>
@@ -20,7 +28,7 @@ const TodoList = () => {
             { todos.map(todo => 
                 <TodoItem todo={todo} key={todo.title}></TodoItem>
             )}
-            <TodoForm addTodo={handleNewTodo} resetTodos={()=> console.log('reset')}></TodoForm>
+            <TodoForm addTodo={handleNewTodo} resetTodos={()=> dispatch(reset())}></TodoForm>
         </div>
     )
 }

@@ -7,11 +7,13 @@ const TodoForm = ({ addTodo, resetTodos }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        addTodo({
+        const actionSucceed = addTodo({
             'title': inputValue,
             'isDone': false,
         });
-        setInputValue('');
+        if (actionSucceed) {
+            setInputValue('');
+        }
     }
 
     return (
