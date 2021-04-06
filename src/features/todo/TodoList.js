@@ -2,21 +2,6 @@ import { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 
-const todos = [
-    {
-        'title': 'Send a mail',
-        'isDone': false
-    },
-    {
-        'title': 'Finish components of Todolist',
-        'isDone': true
-    },
-    {
-        'title': 'Do the laungery',
-        'isDone': false
-    },
-]
-
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
 
